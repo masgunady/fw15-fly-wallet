@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
-import ElementSideAuth from '@/components/element-side-auth'
+import ElementSideAuth from '@/components/ElementSideAuth'
 import Link from 'next/link'
 
 function CreatePinStatus() {
