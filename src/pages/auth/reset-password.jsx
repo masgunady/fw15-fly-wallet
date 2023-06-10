@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
-import ElementSideAuth from '@/components/element-side-auth'
+import ElementSideAuth from '@/components/ElementSideAuth'
 
 function ResetPassword() {
   const [iconEye, setIconEye] = React.useState(false)

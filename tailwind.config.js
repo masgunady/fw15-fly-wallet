@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
           'login-pattern': "url('../../public/home-pattern.svg')",
+          'home-pattern': "url('../../public/home-pattern-phone.png')",
       },
     },
   },
@@ -23,12 +24,13 @@ module.exports = {
                     'info':'#070A52',
                     'success':'#3A3D42',
                     'error':'#D21312',
-                    'snow': '#eaeaea'
+                    'snow': '#E5E5E5'
         }
       }
     ]
   },
   plugins: [
     require('daisyui'),
+    require('tailwind-scrollbar-hide')
   ],
 }

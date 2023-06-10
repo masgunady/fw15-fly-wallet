@@ -3,7 +3,7 @@ import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import { IoPersonOutline } from 'react-icons/io5'
 import Link from 'next/link'
-import ElementSideAuth from '@/components/element-side-auth'
+import ElementSideAuth from '@/components/ElementSideAuth'
 
 function Register() {
   const [iconEye, setIconEye] = React.useState(false)
