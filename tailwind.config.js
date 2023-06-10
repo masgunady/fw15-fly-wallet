@@ -8,11 +8,27 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+          'login-pattern': "url('../../public/home-pattern.svg')",
       },
     },
   },
-  plugins: [],
+  daisyui:{
+    themes:[
+      {
+        defaultTheme:{
+                    'primary':'#D21312',
+                    'secondary':'#ED2B2A',
+                    'accent':'#F15A59',
+                    'neutral':'#3A3D42',
+                    'info':'#070A52',
+                    'success':'#3A3D42',
+                    'error':'#D21312',
+                    'snow': '#eaeaea'
+        }
+      }
+    ]
+  },
+  plugins: [
+    require('daisyui'),
+  ],
 }
