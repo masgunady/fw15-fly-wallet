@@ -1,8 +1,7 @@
 import React from 'react'
-import { AiOutlineMail } from 'react-icons/ai'
 import ElementSideAuth from '@/components/ElementSideAuth'
 
-function CreatePin() {
+const CreatePin = () => {
   const [otpPin, setOtpPin] = React.useState(['', '', '', '', '', ''])
   const handleOtpPin = (event, index) => {
     const spreadOtp = [...otpPin]
