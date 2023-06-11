@@ -1,0 +1,86 @@
+import React from 'react'
+import Image from 'next/image'
+import profilePict from '../../public/user1.png'
+import Link from 'next/link'
+import { AiOutlineArrowRight, AiOutlineCheck } from 'react-icons/ai'
+import { BsPencil } from 'react-icons/bs'
+
+function UserProfileContent() {
+  return (
+    <div className=" p-16 flex flex-col items-start justify-start gap-9">
+      <div className="w-full flex flex-col items-center justify-between gap-5">
+        <div className="w-full flex flex-col justify-center items-center gap-4">
+          <div className="w-20 h-20 flex items-center justify-center rounded-full">
+            <Image src={profilePict} alt="" className="w-20 h-20" />
+          </div>
+          <button className="text-neutral text-sm font-semibold flex items-center gap-2">
+            <i>
+              <BsPencil />
+            </i>
+            <div>Edit</div>
+          </button>
+        </div>
+        <div className="text-2xl text-neutral font-semibold">
+          Robert Chandler
+        </div>
+        <div className="text-base text-neutral">+62 813-9387-7946</div>
+      </div>
+
+      <div className="w-full h-full flex flex-col items-center justify-center gap-5">
+        <Link
+          href="/user/profile/information"
+          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+        >
+          <div className="w-full h-full flex items-start justify-between gap-5">
+            <div className="text-xl text-neutral font-semibold">
+              Personal Information
+            </div>
+            <div>
+              <i>
+                <AiOutlineArrowRight size={25} className="text-black" />
+              </i>
+            </div>
+          </div>
+        </Link>
+        <Link
+          href="/"
+          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+        >
+          <div className="w-full h-full flex items-start justify-between gap-5">
+            <div className="text-xl text-neutral font-semibold">
+              Change Password
+            </div>
+            <div>
+              <i>
+                <AiOutlineArrowRight size={25} className="text-black" />
+              </i>
+            </div>
+          </div>
+        </Link>
+        <Link
+          href="/"
+          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+        >
+          <div className="w-full h-full flex items-start justify-between gap-5">
+            <div className="text-xl text-neutral font-semibold">Change PIN</div>
+            <div>
+              <i>
+                <AiOutlineArrowRight size={25} className="text-black" />
+              </i>
+            </div>
+          </div>
+        </Link>
+        <Link
+          href="/"
+          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+        >
+          <div className="w-full h-full flex items-start justify-between gap-5">
+            <div className="text-xl text-neutral font-semibold">Logout</div>
+          </div>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+export default UserProfileContent
