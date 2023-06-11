@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import ElementSideAuth from '@/components/ElementSideAuth'
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   return (
     <main>
       <div className=" bg-login-pattern bg-no-repeat bg-cover w-full h-screen flex items-center justify-center">

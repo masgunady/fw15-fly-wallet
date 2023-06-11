@@ -3,7 +3,7 @@ import { AiOutlineCheck } from 'react-icons/ai'
 import ElementSideAuth from '@/components/ElementSideAuth'
 import Link from 'next/link'
 
-function CreatePinStatus() {
+const CreatePinStatus = () => {
   return (
     <main>
       <div className=" bg-login-pattern bg-no-repeat bg-cover w-full h-screen flex items-center justify-center">

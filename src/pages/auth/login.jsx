@@ -4,7 +4,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi'
 import ElementSideAuth from '@/components/ElementSideAuth'
 import Link from 'next/link'
 
-function Login() {
+const Login = () => {
   const [iconEye, setIconEye] = React.useState(false)
   const [typePassword, setTypePassword] = React.useState(false)
 

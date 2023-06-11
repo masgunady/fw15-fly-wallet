@@ -1,9 +1,9 @@
 import Header from '@/components/Header'
 import UserSidebar from '@/components/UserSideBar'
-import UserDashboardContent from '@/components/UserDashboardContent'
 import UserFooter from '@/components/UserFooter'
+import UserHistoryContent from '@/components/UserHistoryContent'
 
-const Dashboard = () => {
+const History = () => {
   return (
     <>
       <Header />
@@ -13,8 +13,8 @@ const Dashboard = () => {
             <aside className="hidden min-w-[220px] md:block basis-1/4 bg-white h-full rounded-3xl py-11">
               <UserSidebar />
             </aside>
-            <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5">
-              <UserDashboardContent />
+            <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5 bg-white">
+              <UserHistoryContent />
             </section>
           </div>
         </div>
@@ -24,4 +24,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default History

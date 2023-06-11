@@ -5,7 +5,7 @@ import { IoPersonOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import ElementSideAuth from '@/components/ElementSideAuth'
 
-function Register() {
+const Register = () => {
   const [iconEye, setIconEye] = React.useState(false)
   const [typePassword, setTypePassword] = React.useState(false)
 
