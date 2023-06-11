@@ -1,3 +1,4 @@
+import React from 'react'
 import Image from 'next/image'
 import {
   AiOutlineArrowDown,
@@ -7,7 +8,19 @@ import {
 import graphics from '../../public/graphic.png'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
+import UserTransactionTopup from './UserTransactionTopup'
 const UserDashboardContent = () => {
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const openModal = () => {
+    if (modalOpen === true) {
+      setModalOpen(false)
+      setTimeout(() => {
+        setModalOpen(true)
+      }, 200)
+    } else {
+      setModalOpen(true)
+    }
+  }
   return (
     <>
       <div className="w-full h-48 rounded-3xl bg-primary flex items-center justify-between p-9">
@@ -24,7 +37,12 @@ const UserDashboardContent = () => {
             </button>
           </div>
           <div>
-            <button className="btn btn-accent text-white capitalize text-sm md:text-lg sm:w-40">
+            <button
+              onClick={() => {
+                openModal()
+              }}
+              className="btn btn-accent text-white capitalize text-sm md:text-lg sm:w-40"
+            >
               <AiOutlinePlus size={25} className="text-[#EAEAEA]" />{' '}
               <span className="hidden md:block">Top Up</span>
             </button>
@@ -185,6 +203,7 @@ const UserDashboardContent = () => {
           </div>
         </div>
       </div>
+      {modalOpen && <UserTransactionTopup visibleModal={modalOpen} />}
     </>
   )
 }
