@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 
 const UserProfileInformation = () => {
@@ -15,7 +13,7 @@ const UserProfileInformation = () => {
           want to make changes on your information, contact our support.
         </div>
       </div>
-      <div className="w-full h-[800px] overflow-scroll scrollbar-hide flex flex-col items-start justify-start gap-11">
+      <div className="w-full h-[550px] overflow-scroll scrollbar-hide flex flex-col items-start justify-start gap-11">
         <div className="w-full h-full flex flex-col items-center justify-start gap-5 rounded-xl shadow-md shadow-[#EAEAEA]">
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
@@ -44,6 +42,12 @@ const UserProfileInformation = () => {
                 +62 813-9387-7946
               </div>
             </div>
+            <Link
+              href="/user/profile/update/phone-number"
+              className="text-primary text-lg font-semibold"
+            >
+              Manage
+            </Link>
           </div>
         </div>
       </div>
