@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
-import { AiOutlineArrowRight, AiOutlineCheck } from 'react-icons/ai'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 import { BsPencil } from 'react-icons/bs'
 
 function UserProfileContent() {
@@ -43,7 +43,7 @@ function UserProfileContent() {
           </div>
         </Link>
         <Link
-          href="/"
+          href="/user/profile/update/password"
           className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
@@ -58,7 +58,7 @@ function UserProfileContent() {
           </div>
         </Link>
         <Link
-          href="/"
+          href="/user/profile/update/pin"
           className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
