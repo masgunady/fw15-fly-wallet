@@ -25,7 +25,7 @@ const CreatePinStatus = () => {
           </div>
           <div className="self-center w-full mt-7">
             <Link
-              href="/"
+              href="/user/dashboard"
               className="w-full btn btn-primary capitalize text-base text-white font-semibold hover:font-bold"
             >
               Go to dashboard

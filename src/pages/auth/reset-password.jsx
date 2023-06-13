@@ -3,6 +3,45 @@ import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import ElementSideAuth from '@/components/ElementSideAuth'
 
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
+import { withIronSessionSsr } from 'iron-session/next'
+import coockieConfig from '@/helpers/cookieConfig'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import react from 'react'
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const token = req.session?.token
+
+    if (token) {
+      res.setHeader('location', '/home')
+      res.statusCode = 302
+      res.end()
+      return { prop: { token } }
+    }
+
+    return {
+      props: {
+        token: null,
+      },
+    }
+  },
+  coockieConfig
+)
+
+const validationSchema = Yup.object({
+  email: Yup.string().email('Email is invalid').required('Email is invalid'),
+  password: Yup.string()
+    .min(8, 'must have input 8 characters')
+    .required('Password is invalid'),
+  confirmPassword: Yup.string()
+    .required('Confirm password is empty !')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+})
+
 const ResetPassword = () => {
   const [iconEye, setIconEye] = React.useState(false)
   const [typePassword, setTypePassword] = React.useState(false)

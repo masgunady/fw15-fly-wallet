@@ -4,6 +4,8 @@ import { AiOutlineArrowUp, AiOutlinePlus, AiOutlineUser } from 'react-icons/ai'
 import { FiLogOut } from 'react-icons/fi'
 import { RxDashboard } from 'react-icons/rx'
 import UserTransactionTopup from './UserTransactionTopup'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 const UserSidebar = () => {
   const [modalOpen, setModalOpen] = React.useState(false)
   const openModal = () => {
@@ -15,6 +17,12 @@ const UserSidebar = () => {
     } else {
       setModalOpen(true)
     }
+  }
+
+  const router = useRouter()
+  const doLogout = async () => {
+    await axios.get('/api/logout')
+    router.replace('/auth/login')
   }
 
   return (
@@ -70,14 +78,33 @@ const UserSidebar = () => {
             <div className="text-neutral text-lg">Profile</div>
           </Link>
         </div>
-        <div className="flex items-center gap-3 xl:gap-5 h-11 w-full pl-5 xl:px-10 ">
+        <button
+          onClick={() => window.my_modal_5.showModal()}
+          className="flex items-center gap-3 xl:gap-5 h-11 w-full pl-5 xl:px-10 "
+        >
           <div>
             <i>
               <FiLogOut size={25} className="text-neutral" />
             </i>
           </div>
           <div className="text-neutral text-lg">Logout</div>
-        </div>
+        </button>
+        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle ">
+          <form method="dialog" className="modal-box bg-white ">
+            <h3 className="font-bold text-lg">Log Out</h3>
+            <p className="py-4">Are you sure you want to logout?</p>
+            <div className="modal-action">
+              <button
+                type="button"
+                onClick={doLogout}
+                className="btn btn-error"
+              >
+                Ok
+              </button>
+              <button className="btn">Close</button>
+            </div>
+          </form>
+        </dialog>
       </div>
       {modalOpen && <UserTransactionTopup visibleModal={modalOpen} />}
     </>

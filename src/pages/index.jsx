@@ -6,10 +6,30 @@ import HomePartnerSection from '@/components/HomePartnerSection'
 import HomeSupportSection from '@/components/HomeSupportSection'
 import HomeFeatureSection from '@/components/HomeFeatureSection'
 import HomeTestimonySection from '@/components/HomeTestimonySection'
-function Home() {
+import { withIronSessionSsr } from 'iron-session/next'
+import cookieConfig from '@/helpers/cookieConfig'
+import axios from 'axios'
+import Head from 'next/head'
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req }) {
+    const token = req.session?.token || null
+    return {
+      props: {
+        token,
+      },
+    }
+  },
+  cookieConfig
+)
+
+function Home({ token }) {
   return (
     <>
-      <Header />
+      <Head>
+        <title>FlyWallet</title>
+      </Head>
+      <Header token={token} />
       <main className="pt-28">
         <HomeBannerSection />
         <HomePartnerSection />
