@@ -1,11 +1,14 @@
 import React from 'react'
-import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
+import {
+  AiOutlineLock,
+  AiOutlineMail,
+  AiOutlineExclamation,
+} from 'react-icons/ai'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import { IoPersonOutline } from 'react-icons/io5'
 import Link from 'next/link'
 import ElementSideAuth from '@/components/ElementSideAuth'
 import Head from 'next/head'
-import { MdError } from 'react-icons/md'
 import { withIronSessionSsr } from 'iron-session/next'
 import cookieConfig from '@/helpers/cookieConfig'
 import axios from 'axios'
@@ -106,7 +109,7 @@ const Register = () => {
           </div>
           {errorMessage && (
             <div className="flex flex-row justify-center alert alert-error shadow-lg text-white text-lg">
-              <MdError size={30} />
+              <AiOutlineExclamation size={30} />
               {errorMessage}
             </div>
           )}

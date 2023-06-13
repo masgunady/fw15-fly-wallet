@@ -1,11 +1,14 @@
 import React from 'react'
-import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
+import {
+  AiOutlineLock,
+  AiOutlineMail,
+  AiOutlineExclamation,
+} from 'react-icons/ai'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import ElementSideAuth from '@/components/ElementSideAuth'
 import Link from 'next/link'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { MdError } from 'react-icons/md'
 import { withIronSessionSsr } from 'iron-session/next'
 import cookieConfig from '@/helpers/cookieConfig'
 import axios from 'axios'
@@ -89,7 +92,7 @@ const Login = () => {
           </div>
           {errorMessage && (
             <div className="flex flex-row justify-center alert alert-error shadow-lg text-white text-lg">
-              <MdError size={30} />
+              <AiOutlineExclamation size={30} />
               {errorMessage}
             </div>
           )}
