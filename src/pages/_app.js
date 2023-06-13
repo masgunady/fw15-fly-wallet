@@ -1,17 +1,13 @@
-import '@/styles/globals.css'
-import {Poppins} from 'next/font/google'
-
-const poppins = Poppins({
-  
-    weight: '300',
-    subsets: ['latin']
-  
-})
+import "@/styles/globals.css";
+import { Provider } from "react-redux";
+import store from "@/redux/store";
+import LoadingBar from '@/components/LoadingBar'
 
 export default function App({ Component, pageProps }) {
-  return (
-    <main className='poppins.className'>
-      <Component {...pageProps} />
-    </main>
-  )
+    return (
+        <Provider store={store}>
+          <LoadingBar/>
+            <Component {...pageProps} />
+        </Provider>
+    );
 }

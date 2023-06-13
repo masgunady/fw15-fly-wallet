@@ -4,10 +4,49 @@ import UserProfileUpdatePassword from '@/components/UserProfileUpdatePassword'
 import UserSidebar from '@/components/UserSidebar'
 import React from 'react'
 
-function Password() {
+import { withIronSessionSsr } from 'iron-session/next'
+import cookieConfig from '@/helpers/cookieConfig'
+import axios from 'axios'
+import Head from 'next/head'
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const token = req.session?.token
+
+    if (!token) {
+      res.setHeader('location', '/auth/login')
+      res.statusCode = 302
+      res.end()
+      return {
+        prop: {},
+      }
+    }
+    const { data } = await axios.get(
+      'https://cute-lime-goldfish-toga.cyclic.app/profile',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    return {
+      props: {
+        token,
+        user: data.results,
+      },
+    }
+  },
+  cookieConfig
+)
+
+function Password({ token }) {
   return (
     <>
-      <Header />
+      <Head>
+        <title>Update - Password</title>
+      </Head>
+      <Header token={token} />
       <main className="pt-28 pb-16 bg-[#EAEAEA]">
         <div className="w-full min-h-[650px] lg:h-[750px] px-7 xl:px-36 2xl:px-56 py-11">
           <div className="w-full h-full flex justify-center items-start gap-7">
