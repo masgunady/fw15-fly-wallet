@@ -4,14 +4,42 @@ import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { BsPencil } from 'react-icons/bs'
+import http from '@/helpers/http'
 
-function UserProfileContent() {
+function UserProfileContent({ token }) {
+  const [profile, setProfile] = React.useState({})
+
+  React.useEffect(() => {
+    if (token) {
+      async function getProfile() {
+        const { data } = await http(token).get('/profile')
+        setProfile(data.results)
+      }
+      getProfile()
+    }
+  }, [token])
   return (
     <div className=" p-16 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex flex-col items-center justify-between gap-5">
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <div className="w-20 h-20 flex items-center justify-center rounded-full">
-            <Image src={profilePict} alt="" className="w-20 h-20" />
+            {profile?.picture ? (
+              <Image
+                width={150}
+                height={150}
+                className="object-fit"
+                src={user.picture}
+                alt="userImage"
+              />
+            ) : (
+              <Image
+                width={150}
+                height={150}
+                className="object-fit"
+                src={profilePict}
+                alt="user"
+              />
+            )}
           </div>
           <button className="text-neutral text-sm font-semibold flex items-center gap-2">
             <i>
@@ -20,8 +48,8 @@ function UserProfileContent() {
             <div>Edit</div>
           </button>
         </div>
-        <div className="text-2xl text-neutral font-semibold">
-          Robert Chandler
+        <div className="text-2xl text-neutral font-semibold capitalize">
+          {profile?.fullName}
         </div>
         <div className="text-base text-neutral">+62 813-9387-7946</div>
       </div>
