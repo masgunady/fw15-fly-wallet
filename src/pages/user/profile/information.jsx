@@ -53,7 +53,7 @@ const Information = ({ token }) => {
               <UserSidebar />
             </aside>
             <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5 bg-white">
-              <UserProfileInformation />
+              <UserProfileInformation token={token} />
             </section>
           </div>
         </div>

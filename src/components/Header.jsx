@@ -53,7 +53,9 @@ const Header = ({ token }) => {
               )}
             </Link>
             <div className="flex flex-col">
-              <p className="font-bold text-primary">{profile?.fullName}</p>
+              <p className="font-bold text-primary capitalize">
+                {profile?.fullName}
+              </p>
               <p>{profile?.username}</p>
             </div>
             <MdNotificationsNone

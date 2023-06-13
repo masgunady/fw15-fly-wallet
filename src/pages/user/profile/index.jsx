@@ -54,7 +54,7 @@ function Profile({ token }) {
               <UserSidebar />
             </aside>
             <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5 bg-white">
-              <UserProfileContent />
+              <UserProfileContent token={token} />
             </section>
           </div>
         </div>

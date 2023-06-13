@@ -1,7 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
+import http from '@/helpers/http'
 
-const UserProfileInformation = () => {
+const UserProfileInformation = ({ token }) => {
+  const [profile, setProfile] = React.useState({})
+
+  React.useEffect(() => {
+    if (token) {
+      async function getProfile() {
+        const { data } = await http(token).get('/profile')
+        setProfile(data.results)
+      }
+      getProfile()
+    }
+  }, [token])
   return (
     <div className="p-11 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex flex-col items-start justify-between gap-7">
@@ -18,20 +30,24 @@ const UserProfileInformation = () => {
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">First Name</div>
-              <div className="text-xl text-neutral font-semibold">Robert</div>
+              <div className="text-xl text-neutral font-semibold capitalize">
+                {profile?.fullName?.split(' ')[0]}
+              </div>
             </div>
           </div>
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Last Name</div>
-              <div className="text-xl text-neutral font-semibold">Chandler</div>
+              <div className="text-xl text-neutral font-semibold capitalize">
+                {profile?.fullName?.split(' ')[1]}
+              </div>
             </div>
           </div>
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Verified e-mail</div>
               <div className="text-xl text-neutral font-semibold">
-                robert@mail.com
+                {profile?.email}
               </div>
             </div>
           </div>
