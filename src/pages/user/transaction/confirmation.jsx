@@ -2,6 +2,22 @@ import Header from '@/components/Header'
 import UserSidebar from '@/components/UserSidebar'
 import UserFooter from '@/components/UserFooter'
 import UserTransactionConfirmation from '@/components/UserTransactionConfirmation'
+import { withIronSessionSsr } from 'iron-session/next'
+import checkCredentials from '@/helpers/checkCredentials'
+import cookieConfig from '@/helpers/cookieConfig'
+
+export const getServerSideProps = withIronSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const token = req.session?.token
+    checkCredentials(token, res, '/auth/login')
+    return {
+      props: {
+        token,
+      },
+    }
+  },
+  cookieConfig
+)
 
 const Confirmation = () => {
   return (

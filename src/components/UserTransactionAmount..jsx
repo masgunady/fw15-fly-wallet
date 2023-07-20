@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
-import { AiOutlineSearch } from 'react-icons/ai'
 import { BsPencil } from 'react-icons/bs'
+import { useSelector } from 'react-redux'
 
 const UserTransactionAmount = () => {
+  const profile = useSelector((state) => state.profile.data)
   return (
     <div className="p-11 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex items-center justify-between">
@@ -40,7 +41,7 @@ const UserTransactionAmount = () => {
                 placeholder="0.00"
               />
               <div className="text-lg text-neutral font-semibold pt-2">
-                Rp120.000 Available
+                Rp. {!profile?.balance ? '0' : profile?.balance} Available
               </div>
             </div>
             <div className="w-[70%] text-center relative">

@@ -53,7 +53,7 @@ function UserProfileContent({ token }) {
   }
 
   return (
-    <div className=" p-16 flex flex-col items-start justify-start gap-9">
+    <div className=" p-7 lg:p-16 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex flex-col items-center justify-between gap-5">
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <div className="w-20 h-20 flex items-center justify-center rounded-2xl overflow-hidden">
@@ -134,10 +134,10 @@ function UserProfileContent({ token }) {
       <div className="w-full h-full flex flex-col items-center justify-center gap-5">
         <Link
           href="/user/profile/information"
-          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+          className="w-full lg:w-[50%] h-16 flex items-center justify-center p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
-            <div className="text-xl text-neutral font-semibold">
+            <div className="text-base md:text-xl text-neutral font-semibold">
               Personal Information
             </div>
             <div>
@@ -149,10 +149,10 @@ function UserProfileContent({ token }) {
         </Link>
         <Link
           href="/user/profile/update/password"
-          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+          className="w-full lg:w-[50%] h-16 flex items-center justify-center p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
-            <div className="text-xl text-neutral font-semibold">
+            <div className="text-base md:text-xl text-neutral font-semibold">
               Change Password
             </div>
             <div>
@@ -164,10 +164,12 @@ function UserProfileContent({ token }) {
         </Link>
         <Link
           href="/user/profile/update/pin"
-          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+          className="w-full lg:w-[50%] h-16 flex items-center justify-center p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
-            <div className="text-xl text-neutral font-semibold">Change PIN</div>
+            <div className="text-base md:text-xl text-neutral font-semibold">
+              Change PIN
+            </div>
             <div>
               <i>
                 <AiOutlineArrowRight size={25} className="text-black" />
@@ -177,10 +179,12 @@ function UserProfileContent({ token }) {
         </Link>
         <Link
           href="/"
-          className="w-[50%] h-16 flex items-center justify-start p-5 bg-[#EAEAEA] rounded-lg"
+          className="w-full lg:w-[50%] h-16 flex items-center justify-center p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
-            <div className="text-xl text-neutral font-semibold">Logout</div>
+            <div className="text-base md:text-xl text-neutral font-semibold">
+              Logout
+            </div>
           </div>
         </Link>
       </div>

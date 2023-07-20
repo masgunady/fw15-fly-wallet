@@ -9,7 +9,9 @@ import graphics from '../../public/graphic.png'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 import UserTransactionTopup from './UserTransactionTopup'
+import { useSelector } from 'react-redux'
 const UserDashboardContent = () => {
+  const profile = useSelector((state) => state.profile.data)
   const [modalOpen, setModalOpen] = React.useState(false)
   const openModal = () => {
     if (modalOpen === true) {
@@ -26,7 +28,10 @@ const UserDashboardContent = () => {
       <div className="w-full h-48 rounded-3xl bg-primary flex items-center justify-between p-9">
         <div className="h-full flex flex-col items-start justify-between">
           <div className="text-[#EAEAEA] text-lg">Balance</div>
-          <div className="text-white text-4xl font-semibold">Rp120.000</div>
+          <div className="text-white text-4xl font-semibold">
+            Rp.
+            {!profile?.balance ? '0' : profile?.balance}
+          </div>
           <div className="text-[#EAEAEA] text-lg">+61 812-9387-7946</div>
         </div>
         <div className="h-full flex flex-col gap-5">
