@@ -9,10 +9,25 @@ import graphics from '../../public/graphic.png'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 import UserTransactionTopup from './UserTransactionTopup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import http from '@/helpers/http'
+import { setTransactions } from '@/redux/reducers/transactions'
 const UserDashboardContent = ({ token }) => {
+  const dispatch = useDispatch()
   const profile = useSelector((state) => state.profile.data)
+  const transaction = useSelector((state) => state.transactions.data)
   const [modalOpen, setModalOpen] = React.useState(false)
+
+  const transactionList = React.useCallback(async () => {
+    const { data } = await http(token).get('/transactions', {
+      params: { limit: 10 },
+    })
+    dispatch(setTransactions(data.results))
+  }, [token, dispatch])
+
+  React.useEffect(() => {
+    transactionList()
+  }, [transactionList])
   const openModal = () => {
     if (modalOpen === true) {
       setModalOpen(false)
@@ -93,118 +108,54 @@ const UserDashboardContent = ({ token }) => {
             </Link>
           </div>
           <div className="w-full h-[380px] overflow-scroll scrollbar-hide flex flex-col items-start justify-start gap-9">
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Samuel Suhi
+            {transaction.map((item) => {
+              return (
+                <div
+                  key={`transactions-list-${item?.id}`}
+                  className="w-full h-[56px] flex items-center justify-between"
+                >
+                  <div className="flex items-center justify-start gap-3">
+                    <div>
+                      <Image priority src={profilePict} alt="" />
+                    </div>
+                    <div>
+                      <div
+                        className={`text-neutral text-base font-semibold ${
+                          item?.recipient?.fullName ? 'capitalize' : ''
+                        }`}
+                      >
+                        {item?.recipient?.fullName || item?.recipient?.email}
+                      </div>
+                      {item?.type === 'TOP-UP' && (
+                        <div className="text-">Topup</div>
+                      )}
+
+                      {item?.type === 'TRANSFER' &&
+                        (item.sender.id !== profile.id ? (
+                          <div className="text-">Accept</div>
+                        ) : (
+                          <div className="text-">Transfer</div>
+                        ))}
+                    </div>
                   </div>
-                  <div className="text-">Accept</div>
+                  {item?.type === 'TOP-UP' && (
+                    <div className="text-base font-semibold text-blue-500">
+                      +Rp{item?.amount}
+                    </div>
+                  )}
+                  {item?.type === 'TRANSFER' &&
+                    (item.sender.id !== profile.id ? (
+                      <div className="text-base font-semibold text-green-500">
+                        +Rp{item?.amount}
+                      </div>
+                    ) : (
+                      <div className="text-base font-semibold text-primary">
+                        -Rp{item?.amount}
+                      </div>
+                    ))}
                 </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Netflix
-                  </div>
-                  <div className="text-">Transfer</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-accent">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Cristine Mar ...
-                  </div>
-                  <div className="text-">Accept</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Cristine Mar ...
-                  </div>
-                  <div className="text-">Accept</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Cristine Mar ...
-                  </div>
-                  <div className="text-">Accept</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Cristine Mar ...
-                  </div>
-                  <div className="text-">Accept</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
-            <div className="w-full h-[56px] flex items-center justify-between">
-              <div className="flex items-center justify-start gap-3">
-                <div>
-                  <Image priority src={profilePict} alt="" />
-                </div>
-                <div>
-                  <div className="text-neutral text-base font-semibold">
-                    Cristine Mar ...
-                  </div>
-                  <div className="text-">Accept</div>
-                </div>
-              </div>
-              <div className="text-base font-semibold text-green-500">
-                +Rp50.000
-              </div>
-            </div>
+              )
+            })}
           </div>
         </div>
       </div>

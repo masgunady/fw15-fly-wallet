@@ -5,6 +5,7 @@ import http from '@/helpers/http'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdCheck, MdError } from 'react-icons/md'
 import { setProfile } from '@/redux/reducers/profile'
+import { setTransactions } from '@/redux/reducers/transactions'
 
 const validationSchema = Yup.object({
   amount: Yup.number().min(20000, 'Min amount Rp. 20.000'),
@@ -22,6 +23,13 @@ const UserTransactionTopup = (props) => {
     setCloseModal(false)
   }
 
+  const transactionList = React.useCallback(async () => {
+    const { data } = await http(token).get('/transactions', {
+      params: { limit: 10 },
+    })
+    dispatch(setTransactions(data.results))
+  }, [token, dispatch])
+
   const doTopup = async (values) => {
     const amount = values.amount
     const formData = new URLSearchParams({ amount })
@@ -38,6 +46,7 @@ const UserTransactionTopup = (props) => {
         setSuccessMassage('')
         setCloseModal(false)
       }, 1500)
+      transactionList()
     }
   }
 
