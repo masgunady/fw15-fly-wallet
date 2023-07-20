@@ -157,7 +157,7 @@ const Register = () => {
                       <input
                         type="text"
                         name="username"
-                        placeholder="Enter your lastname"
+                        placeholder="Enter your username"
                         className="h-full w-full outline-none text-neutral"
                         onChange={handleChange}
                         onBlur={handleBlur}

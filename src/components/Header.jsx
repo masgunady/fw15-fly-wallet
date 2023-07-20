@@ -17,7 +17,7 @@ const Header = ({ token }) => {
   const getProfile = React.useCallback(async () => {
     try {
       const { data } = await http(token).get('/profile')
-      console.log(data.results)
+      // console.log(data.results)
       dispatch(setProfile(data.results))
     } catch (error) {
       const message = error?.response?.data?.message

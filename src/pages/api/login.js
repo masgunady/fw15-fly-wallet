@@ -13,7 +13,7 @@ export default withIronSessionApiRoute(async function loginRoute(req, res) {
     }
   )
   const response = await request.json()
-  console.log( process.env.NEXT_PUBLIC_BACKEND_URL)
+  // console.log( process.env.NEXT_PUBLIC_BACKEND_URL)
   const token = response?.results?.token
   if (token) {
     req.session.token = token

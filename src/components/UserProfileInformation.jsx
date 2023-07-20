@@ -1,10 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
-import http from '@/helpers/http'
 import { useSelector } from 'react-redux'
+import UserEditProfile from './UserEditProfile'
 
 const UserProfileInformation = ({ token }) => {
   const profile = useSelector((state) => state.profile.data)
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const handleOpenModal = () => {
+    if (modalOpen === true) {
+      setModalOpen(false)
+      setTimeout(() => {
+        setModalOpen(true)
+      }, 100)
+    } else {
+      setModalOpen(true)
+    }
+  }
 
   return (
     <div className="p-11 flex flex-col items-start justify-start gap-9">
@@ -21,11 +32,14 @@ const UserProfileInformation = ({ token }) => {
         <div className="w-full h-full flex flex-col items-center justify-start gap-5 rounded-xl shadow-md shadow-[#EAEAEA]">
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
-              <div className="text-base">Full Name</div>
+              <div className="w-full flex items-center justify-between">
+                <div className="text-base">Full Name</div>
+                <div className="text-base text-primary font-bold">
+                  <button onClick={handleOpenModal}>Edit</button>
+                </div>
+              </div>
               <div className="text-xl text-neutral font-semibold capitalize">
-                {profile?.fullName
-                  ? profile?.fullName?.split(' ')[0]
-                  : 'not set'}
+                {profile?.fullName ? profile?.fullName : 'not set'}
               </div>
             </div>
           </div>
@@ -53,6 +67,7 @@ const UserProfileInformation = ({ token }) => {
           </div>
         </div>
       </div>
+      {modalOpen && <UserEditProfile visibleModal={modalOpen} token={token} />}
     </div>
   )
 }

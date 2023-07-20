@@ -13,6 +13,7 @@ const UserTransactionTopup = ({ visibleModal }) => {
           id="loading"
           className="modal-toggle"
           checked={closeModal}
+          onChange={() => setCloseModal(!closeModal)}
         />
         <div className="modal">
           <div className="modal-box bg-white">
