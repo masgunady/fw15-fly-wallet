@@ -13,7 +13,7 @@ const UserSidebar = () => {
       setModalOpen(false)
       setTimeout(() => {
         setModalOpen(true)
-      }, 200)
+      }, 100)
     } else {
       setModalOpen(true)
     }

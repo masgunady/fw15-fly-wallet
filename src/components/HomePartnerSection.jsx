@@ -14,6 +14,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={microsoft}
                 alt="Follow us"
@@ -24,6 +26,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={dropbox}
                 alt="Follow us"
@@ -34,6 +38,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={hnm}
                 alt="Follow us"
@@ -44,6 +50,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={airbnb}
                 alt="Follow us"
@@ -54,6 +62,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={canon}
                 alt="Follow us"
@@ -64,6 +74,8 @@ const HomePartnerSection = () => {
           <div className="">
             <div className="w-[173px] h-[120px]">
               <Image
+                width={173}
+                height={120}
                 priority
                 src={dell}
                 alt="Follow us"

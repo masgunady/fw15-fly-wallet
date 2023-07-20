@@ -72,7 +72,7 @@ const UserDashboardContent = () => {
             </div>
           </div>
           <div className="w-full flex items-center justify-center pt-11">
-            <Image src={graphics} alt="" />
+            <Image priority src={graphics} alt="" />
           </div>
         </div>
         <div className="w-full lg:w-[45%] 2xl:w-[40%] h-full bg-white rounded-3xl p-7 flex flex-col items-start justify-start gap-7">
@@ -91,7 +91,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -107,7 +107,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -123,7 +123,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -139,7 +139,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -155,7 +155,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -171,7 +171,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">
@@ -187,7 +187,7 @@ const UserDashboardContent = () => {
             <div className="w-full h-[56px] flex items-center justify-between">
               <div className="flex items-center justify-start gap-3">
                 <div>
-                  <Image src={profilePict} alt="" />
+                  <Image priority src={profilePict} alt="" />
                 </div>
                 <div>
                   <div className="text-neutral text-base font-semibold">

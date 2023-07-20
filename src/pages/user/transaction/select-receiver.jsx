@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import UserSidebar from '@/components/UserSideBar'
+import UserSidebar from '@/components/UserSidebar'
 import UserFooter from '@/components/UserFooter'
 import UserTransactionSelect from '@/components/UserTransactionSelect'
 

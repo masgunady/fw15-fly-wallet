@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Header from '@/components/Header'
-import UserSidebar from '@/components/UserSideBar'
+import UserSidebar from '@/components/UserSidebar'
 import UserDashboardContent from '@/components/UserDashboardContent'
 import UserFooter from '@/components/UserFooter'
 

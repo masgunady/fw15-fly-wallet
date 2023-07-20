@@ -1,38 +1,19 @@
 import Header from '@/components/Header'
-import UserSidebar from '@/components/UserSideBar'
+import UserSidebar from '@/components/UserSidebar'
 import UserFooter from '@/components/UserFooter'
 import UserProfileInformation from '@/components/UserProfileInformation'
-
 import { withIronSessionSsr } from 'iron-session/next'
 import cookieConfig from '@/helpers/cookieConfig'
-import axios from 'axios'
 import Head from 'next/head'
+import checkCredentials from '@/helpers/checkCredentials'
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req, res }) {
     const token = req.session?.token
-
-    if (!token) {
-      res.setHeader('location', '/auth/login')
-      res.statusCode = 302
-      res.end()
-      return {
-        prop: {},
-      }
-    }
-    const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_BACKEND_URL + '/profile',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-
+    checkCredentials(token, res, '/auth/login')
     return {
       props: {
         token,
-        user: data.results,
       },
     }
   },
