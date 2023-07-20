@@ -2,10 +2,14 @@ import React from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import ElementSideAuth from '@/components/ElementSideAuth'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const CreatePinStatus = () => {
   return (
     <main>
+      <Head>
+        <title>Success!</title>
+      </Head>
       <div className=" bg-login-pattern bg-no-repeat bg-cover w-full h-screen flex items-center justify-center">
         <ElementSideAuth />
         <section className="bg-white w-full h-full flex flex-col justify-center items-start gap-9 lg:basis-2/5 pl-5 lg:pl-11 pr-5 lg:pr-11 xl:pr-36">

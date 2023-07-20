@@ -21,7 +21,7 @@ export const getServerSideProps = withIronSessionSsr(
       }
     }
     const { data } = await axios.get(
-      'https://cute-lime-goldfish-toga.cyclic.app/profile',
+      process.env.NEXT_PUBLIC_BACKEND_URL + '/profile',
       {
         headers: {
           Authorization: `Bearer ${token}`,
