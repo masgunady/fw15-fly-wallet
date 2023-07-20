@@ -10,7 +10,7 @@ import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 import UserTransactionTopup from './UserTransactionTopup'
 import { useSelector } from 'react-redux'
-const UserDashboardContent = () => {
+const UserDashboardContent = ({ token }) => {
   const profile = useSelector((state) => state.profile.data)
   const [modalOpen, setModalOpen] = React.useState(false)
   const openModal = () => {
@@ -208,7 +208,9 @@ const UserDashboardContent = () => {
           </div>
         </div>
       </div>
-      {modalOpen && <UserTransactionTopup visibleModal={modalOpen} />}
+      {modalOpen && (
+        <UserTransactionTopup visibleModal={modalOpen} token={token} />
+      )}
     </>
   )
 }

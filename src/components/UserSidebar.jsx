@@ -6,7 +6,9 @@ import { RxDashboard } from 'react-icons/rx'
 import UserTransactionTopup from './UserTransactionTopup'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-const UserSidebar = () => {
+
+const UserSidebar = (props) => {
+  const { token } = props
   const [modalOpen, setModalOpen] = React.useState(false)
   const openModal = () => {
     if (modalOpen === true) {
@@ -106,7 +108,9 @@ const UserSidebar = () => {
           </form>
         </dialog>
       </div>
-      {modalOpen && <UserTransactionTopup visibleModal={modalOpen} />}
+      {modalOpen && (
+        <UserTransactionTopup visibleModal={modalOpen} token={token} />
+      )}
     </>
   )
 }
