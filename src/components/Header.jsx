@@ -30,7 +30,7 @@ const Header = ({ token }) => {
   }, [getProfile])
 
   return (
-    <nav className="w-full h-28 px-7 xl:px-36 fixed bg-white rounded-b-2xl drop-shadow-sm">
+    <nav className="w-full h-28 px-7 xl:px-36 fixed z-10 bg-white rounded-b-2xl drop-shadow-sm">
       <div className="w-full h-full flex items-center justify-between">
         <Link
           href="/"
