@@ -5,6 +5,7 @@ import UserTransactionStatus from '@/components/UserTransactionStatus'
 import checkCredentials from '@/helpers/checkCredentials'
 import { withIronSessionSsr } from 'iron-session/next'
 import cookieConfig from '@/helpers/cookieConfig'
+import { useRouter } from 'next/router'
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req, res }) {
     const token = req.session?.token
@@ -18,6 +19,9 @@ export const getServerSideProps = withIronSessionSsr(
   cookieConfig
 )
 const Status = ({ token }) => {
+  const {
+    query: { id },
+  } = useRouter()
   return (
     <>
       <Header token={token} />
@@ -28,7 +32,7 @@ const Status = ({ token }) => {
               <UserSidebar token={token} />
             </aside>
             <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5 bg-white">
-              <UserTransactionStatus />
+              <UserTransactionStatus token={token} id={id} />
             </section>
           </div>
         </div>

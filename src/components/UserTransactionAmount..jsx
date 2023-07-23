@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { BsPencil } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { setAmount } from '@/redux/reducers/transfer'
+import { setAmount, setNote } from '@/redux/reducers/transfer'
 
 const UserTransactionAmount = ({ token }) => {
   const router = useRouter()

@@ -2,14 +2,56 @@ import React from 'react'
 import Image from 'next/image'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
+import PinInput from '@/components/PinInput'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { clearTransferState } from '@/redux/reducers/transfer'
+import http from '@/helpers/http'
+import moment from 'moment'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-const UserTransactionConfirmation = () => {
-  const [otpPin, setOtpPin] = React.useState(['', '', '', '', '', ''])
-  const handleOtpPin = (event, index) => {
-    const spreadOtp = [...otpPin]
-    spreadOtp[index] = event.target.value
-    setOtpPin(spreadOtp)
+const UserTransactionConfirmation = ({ token }) => {
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const recipient = useSelector((state) => state.transfer.user)
+  const amount = useSelector((state) => state.transfer.amount)
+  const note = useSelector((state) => state.transfer.note)
+  const profile = useSelector((state) => state.profile.data)
+  const [pin, setPin] = React.useState('')
+  const balanceLeft = profile.balance - amount
+
+  const notifyWarnReq = (data) => toast.warn(data)
+
+  React.useEffect(() => {
+    if (!recipient) {
+      router.replace('/user/transaction/select-receiver')
+    }
+  }, [recipient])
+
+  const doTransfer = async () => {
+    try {
+      const form = new URLSearchParams({
+        recipientId: recipient.id,
+        notes: note,
+        amount,
+        pin,
+      })
+      const { data } = await http(token).post('/transactions/transfer', form)
+      dispatch(clearTransferState())
+      if (data.results) {
+        router.replace('/user/transaction/status/' + data.results.id)
+      }
+    } catch (error) {
+      const message = error?.response?.data?.message
+      if (message === 'transfer_wrong_pin') {
+        notifyWarnReq('Opss! Wrong PIN')
+      } else {
+        notifyWarnReq(message)
+      }
+    }
   }
+
   return (
     <div className="p-11 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex items-center justify-between">
@@ -19,16 +61,35 @@ const UserTransactionConfirmation = () => {
         <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
           <div className="w-full h-full flex items-center justify-start gap-5">
             <div>
-              <Image src={profilePict} alt="" />
+              {recipient.picture ? (
+                <Image
+                  className="object-cover w-16 h-16 rounded-xl"
+                  width={150}
+                  height={150}
+                  src={recipient.picture}
+                  alt="userImage"
+                />
+              ) : (
+                <Image
+                  className="object-cover w-16 h-16 rounded-xl"
+                  width={150}
+                  height={150}
+                  src={profilePict}
+                  alt="user"
+                />
+              )}
             </div>
             <div>
-              <Link
-                href="/user/transaction/amount"
-                className="text-neutral text-base font-semibold"
+              <div
+                className={`text-neutral text-base font-semibold ${
+                  recipient?.fullName ? 'capitalize' : ''
+                }`}
               >
-                Samuel Suhi
-              </Link>
-              <div className="">+61 813-8975-0987</div>
+                {recipient?.fullName || recipient?.username}
+              </div>
+              <div className="">
+                {recipient?.phones ? recipient.phones : recipient?.email}
+              </div>
             </div>
           </div>
         </div>
@@ -41,35 +102,35 @@ const UserTransactionConfirmation = () => {
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Amount</div>
               <div className="text-xl text-neutral font-semibold">
-                Rp100.000
+                {amount && `Rp${Number(amount).toLocaleString('id')}`}
               </div>
             </div>
           </div>
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Balance Left</div>
-              <div className="text-xl text-neutral font-semibold">Rp20.000</div>
+              <div className="text-xl text-neutral font-semibold">
+                {balanceLeft && `Rp${Number(balanceLeft).toLocaleString('id')}`}
+              </div>
             </div>
           </div>
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Date & Time</div>
               <div className="text-xl text-neutral font-semibold">
-                May 11, 2020 - 12.20
+                {moment(new Date()).format('MMMM Do, YYYY - HH.mm')}
               </div>
             </div>
           </div>
           <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
             <div className="w-full h-full flex flex-col items-start justify-start gap-5">
               <div className="text-base">Notes</div>
-              <div className="text-xl text-neutral font-semibold">
-                For buying soe socks
-              </div>
+              <div className="text-xl text-neutral font-semibold">{note}</div>
             </div>
           </div>
           <div className="w-full text-end mt-5">
             <button
-              onClick={() => window.my_modal_3.showModal()}
+              onClick={() => window.my_modal_1.showModal()}
               className="btn btn-primary capitalize text-white w-full lg:w-[170px]"
             >
               Continue
@@ -77,51 +138,45 @@ const UserTransactionConfirmation = () => {
           </div>
         </div>
       </div>
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="my_modal_1" className="modal">
         <form
           method="dialog"
-          className="modal-box bg-white flex flex-col items-start justify-center gap-7"
+          className="modal-box flex flex-col gap-6 bg-white"
         >
-          <button
-            htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </button>
-          <div className="font-bold text-lg">Enter PIN to Transfer</div>
-          <div className="py-4">
+          <h3 className="font-bold text-primary text-lg">
+            Enter PIN to Transfer
+          </h3>
+          <p className="py-4 pr-28 text-left">
             Enter your 6 digits PIN for confirmation to continue transferring
-            money.
-          </div>
-          <div className="flex flex-col gap-12">
-            <div className="w-full h-12 flex gap-5">
-              <div className="h-full w-full flex gap-5">
-                {otpPin.map((value, index) => {
-                  return (
-                    <input
-                      key={index}
-                      type="text"
-                      value={value}
-                      onChange={(event) => handleOtpPin(event, index)}
-                      maxLength={1}
-                      placeholder="____"
-                      className="text-center h-full w-full outline-none text-neutral input input-bordered border-neutral"
-                    />
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="w-full text-end mt-5">
-            <Link
-              href="/user/transaction/status"
-              className="btn btn-primary capitalize text-white w-full lg:w-[170px]"
+            money.{' '}
+          </p>
+          <PinInput onChangePin={setPin} />
+          <div className="modal-action">
+            <button
+              onClick={doTransfer}
+              disabled={!(pin.length >= 6)}
+              type="submit"
+              className="btn btn-primary w-full h-full lg:w-36 normal-case rounded-xl text-md"
             >
               Continue
-            </Link>
+            </button>
           </div>
         </form>
       </dialog>
+      <div className="pt-24">
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </div>
     </div>
   )
 }

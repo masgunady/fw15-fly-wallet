@@ -51,10 +51,13 @@ const UserDashboardContent = ({ token }) => {
         </div>
         <div className="h-full flex flex-col gap-5">
           <div>
-            <button className="btn btn-accent text-white capitalize text-sm md:text-lg sm:w-40">
+            <Link
+              href={'/user/transaction/select-receiver'}
+              className="btn btn-accent text-white capitalize text-sm md:text-lg sm:w-40"
+            >
               <AiOutlineArrowUp size={25} className="text-[#EAEAEA]" />{' '}
               <span className="hidden md:block">Transfer</span>
-            </button>
+            </Link>
           </div>
           <div>
             <button
@@ -114,43 +117,130 @@ const UserDashboardContent = ({ token }) => {
                   key={`transactions-list-${item?.id}`}
                   className="w-full h-[56px] flex items-center justify-between"
                 >
-                  <div className="flex items-center justify-start gap-3">
-                    <div>
-                      <Image priority src={profilePict} alt="" />
-                    </div>
-                    <div>
-                      <div
-                        className={`text-neutral text-base font-semibold ${
-                          item?.recipient?.fullName ? 'capitalize' : ''
-                        }`}
-                      >
-                        {item?.recipient?.fullName || item?.recipient?.email}
+                  {item.type === 'TOP-UP' && (
+                    <div className="flex items-center justify-start gap-3">
+                      <div>
+                        {item.recipient.picture ? (
+                          <Image
+                            width={150}
+                            height={150}
+                            className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                            src={item.recipient.picture}
+                            alt="userImage"
+                          />
+                        ) : (
+                          <Image
+                            className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                            src={profilePict}
+                            alt="user"
+                          />
+                        )}
                       </div>
-                      {item?.type === 'TOP-UP' && (
+                      <div>
+                        <div
+                          className={`text-neutral text-base font-semibold ${
+                            item?.recipient?.fullName ? 'capitalize' : ''
+                          }`}
+                        >
+                          {item?.recipient?.fullName || item?.recipient?.email}
+                        </div>
+
                         <div className="text-">Topup</div>
+                      </div>
+                    </div>
+                  )}
+
+                  {item.type === 'TRANSFER' && (
+                    <>
+                      {item.recipient.id !== profile.id && (
+                        <div className="flex items-center justify-start gap-3">
+                          <div>
+                            {item.recipient.picture ? (
+                              <Image
+                                width={150}
+                                height={150}
+                                className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                                src={item.recipient.picture}
+                                alt="userImage"
+                              />
+                            ) : (
+                              <Image
+                                className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                                src={profilePict}
+                                alt="user"
+                              />
+                            )}
+                          </div>
+                          <div>
+                            <div
+                              className={`text-neutral text-base font-semibold ${
+                                item?.recipient?.fullName ? 'capitalize' : ''
+                              }`}
+                            >
+                              {item?.recipient?.fullName ||
+                                item?.recipient?.email}
+                            </div>
+
+                            <div className="text-">Outcome</div>
+                          </div>
+                        </div>
                       )}
 
-                      {item?.type === 'TRANSFER' &&
-                        (item.sender.id !== profile.id ? (
-                          <div className="text-">Accept</div>
-                        ) : (
-                          <div className="text-">Transfer</div>
-                        ))}
-                    </div>
-                  </div>
+                      {item.recipient.id === profile.id && (
+                        <div className="flex items-center justify-start gap-3">
+                          <div>
+                            {item.recipient.picture ? (
+                              <Image
+                                width={150}
+                                height={150}
+                                className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                                src={item.recipient.picture}
+                                alt="userImage"
+                              />
+                            ) : (
+                              <Image
+                                className="object-cover w-16 h-16 rounded-xl overflow-hidden"
+                                src={profilePict}
+                                alt="user"
+                              />
+                            )}
+                          </div>
+                          <div>
+                            <div
+                              className={`text-neutral text-base font-semibold ${
+                                item?.recipient?.fullName ? 'capitalize' : ''
+                              }`}
+                            >
+                              {item?.recipient?.fullName ||
+                                item?.recipient?.email}
+                            </div>
+
+                            <div className="text-">Income</div>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   {item?.type === 'TOP-UP' && (
                     <div className="text-base font-semibold text-blue-500">
-                      +Rp{item?.amount}
+                      +
+                      {item.amount &&
+                        `Rp${Number(item.amount).toLocaleString('id')}`}
                     </div>
                   )}
                   {item?.type === 'TRANSFER' &&
                     (item.sender.id !== profile.id ? (
                       <div className="text-base font-semibold text-green-500">
-                        +Rp{item?.amount}
+                        +
+                        {item.amount &&
+                          `Rp${Number(item.amount).toLocaleString('id')}`}
                       </div>
                     ) : (
                       <div className="text-base font-semibold text-primary">
-                        -Rp{item?.amount}
+                        -
+                        {item.amount &&
+                          `Rp${Number(item.amount).toLocaleString('id')}`}
                       </div>
                     ))}
                 </div>
