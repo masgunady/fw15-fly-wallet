@@ -1,11 +1,34 @@
+import React from 'react'
 import Image from 'next/image'
 import profilePict from '../../public/user1.png'
 import Link from 'next/link'
 import { BsPencil } from 'react-icons/bs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { setAmount } from '@/redux/reducers/transfer'
 
-const UserTransactionAmount = () => {
+const UserTransactionAmount = ({ token }) => {
+  const router = useRouter()
+  const dispatch = useDispatch()
   const profile = useSelector((state) => state.profile.data)
+  const recipient = useSelector((state) => state.transfer.user)
+  const amount = useSelector((state) => state.transfer.amount)
+  const note = useSelector((state) => state.transfer.note)
+
+  React.useEffect(() => {
+    if (!recipient) {
+      router.replace('user/transaction/select-receiver')
+    }
+  }, [recipient])
+
+  const chackAmount = (amount) => {
+    amount = parseInt(amount)
+    if (amount > profile.balance) {
+      return profile.balance
+    }
+    return amount
+  }
+
   return (
     <div className="p-11 flex flex-col items-start justify-start gap-9">
       <div className="w-full flex items-center justify-between">
@@ -15,16 +38,35 @@ const UserTransactionAmount = () => {
         <div className="w-full h-28 flex items-center justify-start p-5 rounded-xl shadow-md shadow-[#EAEAEA]">
           <div className="w-full h-full flex items-center justify-start gap-5">
             <div>
-              <Image src={profilePict} alt="" />
+              {recipient.picture ? (
+                <Image
+                  className="object-cover w-16 h-16 rounded-xl"
+                  width={150}
+                  height={150}
+                  src={recipient.picture}
+                  alt="userImage"
+                />
+              ) : (
+                <Image
+                  className="object-cover w-16 h-16 rounded-xl"
+                  width={150}
+                  height={150}
+                  src={profilePict}
+                  alt="user"
+                />
+              )}
             </div>
             <div>
-              <Link
-                href="/user/transaction/amount"
-                className="text-neutral text-base font-semibold"
+              <div
+                className={`text-neutral text-base font-semibold ${
+                  recipient?.fullName ? 'capitalize' : ''
+                }`}
               >
-                Samuel Suhi
-              </Link>
-              <div className="">+61 813-8975-0987</div>
+                {recipient?.fullName || recipient?.username}
+              </div>
+              <div className="">
+                {recipient?.phones ? recipient.phones : recipient?.email}
+              </div>
             </div>
           </div>
         </div>
@@ -36,9 +78,11 @@ const UserTransactionAmount = () => {
           <form className="w-full h-full flex flex-col items-center justify-center gap-11">
             <div className="w-[70%] text-center">
               <input
-                type="text"
+                type="number"
                 className="w-full h-24 text-4xl font-semibold text-center"
                 placeholder="0.00"
+                onChange={(e) => dispatch(setAmount(e.target.value))}
+                value={chackAmount(amount)}
               />
               <div className="text-lg text-neutral font-semibold pt-2">
                 Rp. {!profile?.balance ? '0' : profile?.balance} Available
@@ -49,6 +93,7 @@ const UserTransactionAmount = () => {
                 type="text"
                 className="w-full h-12 text-xl font-semibold pl-11"
                 placeholder="Add some notes"
+                onChange={(e) => dispatch(setNote(e.target.value))}
               />
               <div className="text-lg text-neutral font-semibold pt-2 absolute top-2 left-4">
                 <i>
@@ -57,18 +102,20 @@ const UserTransactionAmount = () => {
               </div>
             </div>
             <div className="w-full text-end">
-              {/* <button
-                type="submit"
+              <button
+                type="button"
                 className="btn btn-primary capitalize text-white w-full lg:w-[170px]"
+                onClick={() => router.replace('/user/transaction/confirmation')}
+                disabled={amount < 10000}
               >
                 Continue
-              </button> */}
-              <Link
+              </button>
+              {/* <Link
                 href="/user/transaction/confirmation"
                 className="btn btn-primary capitalize text-white w-full lg:w-[170px]"
               >
                 Continue
-              </Link>
+              </Link> */}
             </div>
           </form>
         </div>

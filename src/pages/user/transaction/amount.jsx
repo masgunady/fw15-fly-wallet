@@ -30,7 +30,7 @@ const Amount = ({ token }) => {
               <UserSidebar token={token} />
             </aside>
             <section className="w-full lg:basis-3/4 h-full rounded-3xl flex flex-col gap-5 bg-white">
-              <UserTransactionAmount />
+              <UserTransactionAmount token={token} />
             </section>
           </div>
         </div>

@@ -41,7 +41,7 @@ const UserTransactionSelect = ({ token }) => {
 
   React.useEffect(() => {
     if (recipientRedux) {
-      router.push('/transfer/amount')
+      router.push('/user/transaction/amount')
     }
   }, [recipientRedux])
 
