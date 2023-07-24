@@ -7,6 +7,8 @@ import { BsPencil } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProfile } from '@/redux/reducers/profile'
 import http from '@/helpers/http'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 function UserProfileContent({ token }) {
   const dispatch = useDispatch()
@@ -14,6 +16,7 @@ function UserProfileContent({ token }) {
   const [pictureURI, setPictureURI] = React.useState('')
   const [selectedPicture, setSelectedPicture] = React.useState({})
   const [loading, setLoading] = React.useState(false)
+  const router = useRouter()
 
   const fileToDataUrl = (file) => {
     const reader = new FileReader()
@@ -50,6 +53,11 @@ function UserProfileContent({ token }) {
       setLoading(false)
       setPictureURI('')
     }
+  }
+
+  const doLogout = async () => {
+    await axios.get('/api/logout')
+    router.replace('/auth/login')
   }
 
   return (
@@ -177,8 +185,8 @@ function UserProfileContent({ token }) {
             </div>
           </div>
         </Link>
-        <Link
-          href="/"
+        <button
+          onClick={doLogout}
           className="w-full lg:w-[50%] h-16 flex items-center justify-center p-5 bg-[#EAEAEA] rounded-lg"
         >
           <div className="w-full h-full flex items-start justify-between gap-5">
@@ -186,7 +194,7 @@ function UserProfileContent({ token }) {
               Logout
             </div>
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   )

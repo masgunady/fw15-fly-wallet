@@ -115,7 +115,7 @@ const UserDashboardContent = ({ token }) => {
               return (
                 <div
                   key={`transactions-list-${item?.id}`}
-                  className="w-full h-[56px] flex items-center justify-between"
+                  className="w-full h-[72px] flex items-center justify-between"
                 >
                   {item.type === 'TOP-UP' && (
                     <div className="flex items-center justify-start gap-3">
