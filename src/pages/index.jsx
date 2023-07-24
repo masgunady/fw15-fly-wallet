@@ -8,7 +8,6 @@ import HomeFeatureSection from '@/components/HomeFeatureSection'
 import HomeTestimonySection from '@/components/HomeTestimonySection'
 import { withIronSessionSsr } from 'iron-session/next'
 import cookieConfig from '@/helpers/cookieConfig'
-import axios from 'axios'
 import Head from 'next/head'
 
 export const getServerSideProps = withIronSessionSsr(

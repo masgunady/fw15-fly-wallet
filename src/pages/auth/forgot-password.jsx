@@ -51,10 +51,11 @@ const ForgotPassword = () => {
       email: values.email,
     }).toString()
 
-    const { data } = await axios.post(
-      'http://localhost:3000/api/forgot-password',
-      form
-    )
+    const { data } = await axios.post('/api/forgot-password', form)
+    // const { data } = await axios.post(
+    //   'http://localhost:3000/api/forgot-password',
+    //   form
+    // )
     if (data.message === 'auth_forgot_already_requested') {
       dispatch(saveEmail(values.email))
       setErrorMessage('Request OK, You will redirect to reset page')

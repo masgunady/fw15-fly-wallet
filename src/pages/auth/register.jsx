@@ -68,10 +68,11 @@ const Register = () => {
         password: values.password,
       }).toString()
 
-      const { data } = await axios.post(
-        'http://localhost:3000/api/register',
-        form
-      )
+      const { data } = await axios.post('/api/register', form)
+      // const { data } = await axios.post(
+      //   'http://localhost:3000/api/register',
+      //   form
+      // )
 
       if (data.success === true) {
         dispatch(saveEmail(values.email))

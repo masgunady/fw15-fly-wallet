@@ -63,10 +63,12 @@ const ResetPassword = () => {
       confirmPassword: values.confirmPassword,
     }).toString()
 
-    const { data } = await axios.post(
-      'http://localhost:3000/api/reset-password',
-      form
-    )
+    const { data } = await axios.post('/api/reset-password', form)
+
+    // const { data } = await axios.post(
+    //   'http://localhost:3000/api/reset-password',
+    //   form
+    // )
 
     if (data.message === 'auth_reset_password_not_match') {
       setErrorMessage('You have not made a reset request')

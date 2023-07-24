@@ -15,13 +15,15 @@ const Header = ({ token }) => {
   const router = useRouter()
 
   const getProfile = React.useCallback(async () => {
-    try {
-      const { data } = await http(token).get('/profile')
-      // console.log(data.results)
-      dispatch(setProfile(data.results))
-    } catch (error) {
-      const message = error?.response?.data?.message
-      return console.log(message)
+    if (token) {
+      try {
+        const { data } = await http(token).get('/profile')
+        // console.log(data.results)
+        dispatch(setProfile(data.results))
+      } catch (error) {
+        const message = error?.response?.data?.message
+        return console.log(message)
+      }
     }
   }, [token, dispatch])
 
