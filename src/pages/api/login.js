@@ -2,6 +2,7 @@ import cookieConfig from '@/helpers/cookieConfig'
 import { withIronSessionApiRoute } from 'iron-session/next'
 
 export default withIronSessionApiRoute(async function loginRoute(req, res) {
+  console.log('coba-masuk')
   const request = await fetch(
     process.env.NEXT_PUBLIC_BACKEND_URL+'/auth/login',
     {
