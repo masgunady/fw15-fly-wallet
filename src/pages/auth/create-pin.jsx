@@ -9,6 +9,7 @@ import cookieConfig from '@/helpers/cookieConfig'
 import PinInput from '@/components/PinInput'
 import { AiOutlineExclamation } from 'react-icons/ai'
 import Head from 'next/head'
+import styles from './Auth.module.css'
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req, res }) {
@@ -78,7 +79,9 @@ const CreatePin = ({ user }) => {
       <Head>
         <title>Create Pin</title>
       </Head>
-      <div className=" bg-login-pattern bg-no-repeat bg-cover w-full h-screen flex items-center justify-center">
+      <div
+        className={`${styles.side_auth} bg-no-repeat bg-cover w-full h-screen flex items-center justify-center`}
+      >
         <ElementSideAuth />
         <section className="bg-white w-full h-full flex flex-col justify-center items-start gap-9 lg:basis-2/5 pl-5 lg:pl-11 pr-5 lg:pr-11 xl:pr-36">
           <div className="text-neutral text-2xl font-bold leading-8">
